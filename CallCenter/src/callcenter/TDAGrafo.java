@@ -76,7 +76,6 @@ public class TDAGrafo {
     }
 
     boolean addEdge(Vertice v1, Vertice v2, int a) {
-        //System.out.println(Double.POSITIVE_INFINITY<a.getPrice());
         if (!vertices.contains(v1)) {
             addVertex(v1);
         }
@@ -129,6 +128,16 @@ public class TDAGrafo {
 
     int getVertexCount() {
         return vertices.size();
+    }
+    int getOutdegree(Vertice v){
+        int n=0;
+        if(!vertices.contains(v))
+            return 0;
+        int index= vertices.indexOf(v);
+        for(int i=0;i<vertices.size();i++)
+            if(relaciones[index][i]==1)
+                index++;
+        return n;
     }
 
     

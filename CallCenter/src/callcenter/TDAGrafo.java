@@ -13,7 +13,7 @@ import java.util.ArrayList;
  */
 public class TDAGrafo {
     protected ArrayList<Vertice> vertices = new ArrayList();
-    private int[][] relaciones = new int[vertices.size()][vertices.size()];
+    public int[][] relaciones = new int[vertices.size()][vertices.size()];
 
     public class Vertice {
 
@@ -145,7 +145,7 @@ public class TDAGrafo {
                 if(i==j)
                     relaciones[i][j]=0;
                 else
-                    relaciones[i][j]= (int)Math.floor(Math.random() * 9) % 2;
+                    addEdge(vertices.get(i),vertices.get(j),(int)Math.floor(Math.random() * 9) % 2);//= (int)Math.floor(Math.random() * 9) % 2;
             }
             
         }

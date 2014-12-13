@@ -8,6 +8,7 @@ package callcenter;
 import java.io.File;
 import java.util.Scanner;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -55,6 +56,11 @@ public class Principal extends javax.swing.JFrame {
 
         menu_generarrelaciones.setText("Generar Relaciones Aleatorias");
         menu_generarrelaciones.setEnabled(false);
+        menu_generarrelaciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_generarrelacionesActionPerformed(evt);
+            }
+        });
         menu_archivo.add(menu_generarrelaciones);
 
         barra_menu.add(menu_archivo);
@@ -81,22 +87,39 @@ public class Principal extends javax.swing.JFrame {
         Scanner sc;
         try{
             JFileChooser jfc = new JFileChooser();
-            FileFilter filtro = new FileNameExtensionFilter("Archivos",".txt");
+            FileFilter filtro = new FileNameExtensionFilter("Archivos","txt");
             jfc.setFileFilter(filtro);
             int op = jfc.showOpenDialog(this);
             if (op == JFileChooser.APPROVE_OPTION){
                 archivo = jfc.getSelectedFile();
+                
                 sc = new Scanner(archivo);
                 while(sc.hasNext()){
-                    TDAGrafo.Vertice v1 = relaciones.new Vertice(sc.nextLine());
+                    String s1 = sc.nextLine();
+                    System.out.println(s1);
+                    TDAGrafo.Vertice v1 = relaciones.new Vertice(s1);
                     relaciones.addVertex(v1);
                 }
+                menu_generarrelaciones.setEnabled(true);
             }
+            System.out.println(relaciones.getVertexCount());
         }catch(Exception e){
-            
+            e.printStackTrace();
         }
         
     }//GEN-LAST:event_menu_cargarnombresActionPerformed
+
+    private void menu_generarrelacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_generarrelacionesActionPerformed
+        // TODO add your handling code here:
+        relaciones.setRelations();
+        
+        for(int i = 0; i<relaciones.getVertexCount(); i++){
+            for(int j = 0; j<relaciones.getVertexCount(); j++){
+                System.out.println("["+relaciones.relaciones[i][j]+"]");
+            }
+        }
+        JOptionPane.showMessageDialog(this, "Se han generado las relaciones aleatorias");
+    }//GEN-LAST:event_menu_generarrelacionesActionPerformed
 
     /**
      * @param args the command line arguments

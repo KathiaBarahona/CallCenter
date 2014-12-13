@@ -51,10 +51,10 @@ public class TDAGrafo {
         }
         vertices.add(v);
         for (int i = 0; i < vertices.size(); i++) {
-            nuevamatriz[vertices.size() - 1][i] = -1;
-            nuevamatriz[i][vertices.size() - 1] = -1;
+            nuevamatriz[vertices.size() - 1][i] = 0;
+            nuevamatriz[i][vertices.size() - 1] = 0;
         }
-        nuevamatriz[vertices.size() - 1][vertices.size() - 1] = -1;
+        nuevamatriz[vertices.size() - 1][vertices.size() - 1] = 0;
         relaciones = nuevamatriz;
         return true;
     }
@@ -139,6 +139,17 @@ public class TDAGrafo {
                 index++;
         return n;
     }
+    public void setRelations(){
+        for(int i=0; i<vertices.size();i++){
+            for(int j=0;j<vertices.size();j++){
+                if(i==j)
+                    relaciones[i][j]=0;
+                else
+                    relaciones[i][j]= (int)Math.floor(Math.random() * 9) % 2;
+            }
+            
+        }
+     }
 
-    
+                
 }

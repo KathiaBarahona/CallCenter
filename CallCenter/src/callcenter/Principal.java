@@ -5,6 +5,12 @@
  */
 package callcenter;
 
+import java.io.File;
+import java.util.Scanner;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author Lisa
@@ -27,7 +33,39 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        barra_menu = new javax.swing.JMenuBar();
+        menu_archivo = new javax.swing.JMenu();
+        menu_cargarnombres = new javax.swing.JMenuItem();
+        menu_cargarrelaciones = new javax.swing.JMenuItem();
+        menu_guardarrelaciones = new javax.swing.JMenuItem();
+        menu_generarrelaciones = new javax.swing.JMenuItem();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        menu_archivo.setText("Archivo");
+
+        menu_cargarnombres.setText("Cargar Nombres");
+        menu_cargarnombres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_cargarnombresActionPerformed(evt);
+            }
+        });
+        menu_archivo.add(menu_cargarnombres);
+
+        menu_cargarrelaciones.setText("Cargar Relaciones");
+        menu_archivo.add(menu_cargarrelaciones);
+
+        menu_guardarrelaciones.setText("Guardar Relaciones");
+        menu_guardarrelaciones.setEnabled(false);
+        menu_archivo.add(menu_guardarrelaciones);
+
+        menu_generarrelaciones.setText("Generar Relaciones Aleatorias");
+        menu_generarrelaciones.setEnabled(false);
+        menu_archivo.add(menu_generarrelaciones);
+
+        barra_menu.add(menu_archivo);
+
+        setJMenuBar(barra_menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -37,11 +75,34 @@ public class Principal extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 279, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void menu_cargarnombresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_cargarnombresActionPerformed
+        // TODO add your handling code here:
+        File archivo = null;
+        Scanner sc;
+        try{
+            JFileChooser jfc = new JFileChooser();
+            FileFilter filtro = new FileNameExtensionFilter("Archivos",".txt");
+            jfc.setFileFilter(filtro);
+            int op = jfc.showOpenDialog(this);
+            if (op == JFileChooser.APPROVE_OPTION){
+                archivo = jfc.getSelectedFile();
+                sc = new Scanner(archivo);
+                while(sc.hasNext()){
+                    TDAGrafo.Vertice v1 = relaciones.new Vertice(sc.nextLine());
+                    relaciones.addVertex(v1);
+                }
+            }
+        }catch(Exception e){
+            
+        }
+        
+    }//GEN-LAST:event_menu_cargarnombresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +140,13 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuBar barra_menu;
+    private javax.swing.JMenu menu_archivo;
+    private javax.swing.JMenuItem menu_cargarnombres;
+    private javax.swing.JMenuItem menu_cargarrelaciones;
+    private javax.swing.JMenuItem menu_generarrelaciones;
+    private javax.swing.JMenuItem menu_guardarrelaciones;
     // End of variables declaration//GEN-END:variables
+TDAGrafo relaciones = new TDAGrafo();
+
 }

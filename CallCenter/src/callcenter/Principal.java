@@ -92,8 +92,8 @@ public class Principal extends javax.swing.JFrame {
             int op = jfc.showOpenDialog(this);
             if (op == JFileChooser.APPROVE_OPTION){
                 archivo = jfc.getSelectedFile();
-                
                 sc = new Scanner(archivo);
+                
                 while(sc.hasNext()){
                     String s1 = sc.nextLine();
                     System.out.println(s1);
